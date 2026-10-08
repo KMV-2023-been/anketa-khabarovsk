@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Анонимная анкета: история и туризм Хабаровского края</title>
+<style>
+  :root{
+    --bg:#f4f6fa; --card:#ffffff; --accent:#2b6cb0; --accent-hover:#245a94;
+    --text:#1a202c; --muted:#718096; --border:#e2e8f0; --error:#e53e3e;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+    background:var(--bg); color:var(--text); line-height:1.5;
+    padding:24px 16px 64px;
+  }
+  .wrap{max-width:760px;margin:0 auto}
+  header{
+    background:var(--card); border-radius:16px; padding:28px 24px;
+    margin-bottom:20px; box-shadow:0 1px 3px rgba(0,0,0,.06);
+  }
+  h1{font-size:1.5rem;margin-bottom:10px}
+  .subtitle{color:var(--muted);font-size:.95rem}
+  .badge{
+    display:inline-block; background:#e6f0ff; color:var(--accent);
+    font-size:.78rem; font-weight:600; padding:4px 10px;
+    border-radius:999px; margin-bottom:12px;
+  }
+  section{
+    background:var(--card); border-radius:16px; padding:24px;
+    margin-bottom:16px; box-shadow:0 1px 3px rgba(0,0,0,.06);
+  }
+  section h2{
+    font-size:1.05rem; margin-bottom:16px; padding-bottom:8px;
+    border-bottom:2px solid var(--border);
+  }
+  .q{margin-bottom:22px}
+  .q:last-child{margin-bottom:0}
+  .q-label{display:block; font-weight:600; margin-bottom:10px; font-size:.95rem}
+  .q-label .req{color:var(--error); margin-left:2px}
+  .opt{
+    display:flex; align-items:flex-start; gap:10px; padding:9px 12px;
+    border:1px solid var(--border); border-radius:10px; margin-bottom:8px;
+    cursor:pointer; transition:.15s; font-size:.92rem;
+  }
+  .opt:hover{border-color:var(--accent); background:#f7fafc}
+  .opt input{margin-top:3px; accent-color:var(--accent); cursor:pointer}
+  .opt.checked{border-color:var(--accent); background:#ebf4ff}
+  .scale{display:flex; gap:8px; flex-wrap:wrap}
+  .scale .opt{flex:1; min-width:60px; justify-content:center; text-align:center; padding:12px 8px}
+  textarea,input[type=text]{
+    width:100%; padding:11px 13px; border:1px solid var(--border);
+    border-radius:10px; font-family:inherit; font-size:.92rem;
+    resize:vertical; min-height:96px;
+  }
+  textarea:focus,input[type=text]:focus{
+    outline:none; border-color:var(--accent);
+    box-shadow:0 0 0 3px rgba(43,108,176,.15);
+  }
+  .btn{
+    display:inline-block; width:100%; background:var(--accent); color:#fff;
+    border:none; padding:15px; font-size:1rem; font-weight:600;
+    border-radius:12px; cursor:pointer; transition:.15s;
+  }
+  .btn:hover{background:var(--accent-hover)}
+  .btn:disabled{opacity:.6; cursor:not-allowed}
+  .err-msg{color:var(--error); font-size:.85rem; margin-top:6px; display:none}
+  .err-msg.show{display:block}
+  .thanks{
+    display:none; text-align:center; padding:48px 24px; background:var(--card);
+    border-radius:16px; box-shadow:0 1px 3px rgba(0,0,0,.06);
+  }
+  .thanks h2{color:var(--accent); margin-bottom:12px}
+  .thanks p{color:var(--muted)}
+  .footer{text-align:center; font-size:.8rem; color:var(--muted); margin-top:20px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <span class="badge">🔒 Анонимно</span>
+    <h1>История и туризм Хабаровского края</h1>
+    <p class="subtitle">
+      Мы создаём проект о районах Хабаровского края. Ответьте на несколько вопросов —
+      это займёт 3–5 минут. Мы не собираем имена, email и телефоны.
+    </p>
+  </header>
+
+  <form id="survey" novalidate>
+
+    <section>
+      <h2>1. Общая информация</h2>
+
+      <div class="q" data-q="age">
+        <span class="q-label">Ваш возраст <span class="req">*</span></span>
+        <label class="opt"><input type="radio" name="age" value="До 18 лет"> До 18 лет</label>
+        <label class="opt"><input type="radio" name="age" value="18–25 лет"> 18–25 лет</label>
+        <label class="opt"><input type="radio" name="age" value="26–35 лет"> 26–35 лет</label>
+        <label class="opt"><input type="radio" name="age" value="36–50 лет"> 36–50 лет</label>
+        <label class="opt"><input type="radio" name="age" value="Старше 50 лет"> Старше 50 лет</label>
+        <div class="err-msg">Пожалуйста, выберите вариант</div>
+      </div>
+
+      <div class="q" data-q="location">
+        <span class="q-label">Где вы проживаете? <span class="req">*</span></span>
+        <label class="opt"><input type="radio" name="location" value="Хабаровск"> Хабаровск</label>
+        <label class="opt"><input type="radio" name="location" value="Другой город края"> Другой город Хабаровского края</label>
+        <label class="opt"><input type="radio" name="location" value="Район / село края"> Район / село Хабаровского края</label>
+        <label class="opt"><input type="radio" name="location" value="Другой регион России"> Другой регион России</label>
+        <label class="opt"><input type="radio" name="location" value="Другое"> Другое</label>
+        <div class="err-msg">Пожалуйста, выберите вариант</div>
+      </div>
+
+      <div class="q" data-q="activity">
+        <span class="q-label">Ваш род деятельности <span class="req">*</span></span>
+        <label class="opt"><input type="radio" name="activity" value="Школьник / студент"> Школьник / студент</label>
+        <label class="opt"><input type="radio" name="activity" value="Туризм / образование / культура"> Работаю в сфере туризма / образования / культуры</label>
+        <label class="opt"><input type="radio" name="activity" value="Другая сфера"> Работаю в другой сфере</label>
+        <label class="opt"><input type="radio" name="activity" value="Пенсионер"> Пенсионер</label>
+        <label class="opt"><input type="radio" name="activity" value="Другое"> Другое</label>
+        <div class="err-msg">Пожалуйста, выберите вариант</div>
+      </div>
+    </section>
+
+    <section>
+      <h2>2. Интерес к теме</h2>
+
+      <div class="q" data-q="interest_history">
+        <span class="q-label">Насколько интересна история и краеведение Хабаровского края? <span class="req">*</span></span>
+        <div class="scale">
+          <label class="opt"><input type="radio" name="interest_history" value="1"> 1</label>
+          <label class="opt"><input type="radio" name="interest_history" value="2"> 2</label>
+          <label class="opt"><input type="radio" name="interest_history" value="3"> 3</label>
+          <label class="opt"><input type="radio" name="interest_history" value="4"> 4</label>
+          <label class="opt"><input type="radio" name="interest_history" value="5"> 5</label>
+        </div>
+        <div class="err-msg">Пожалуйста, выберите оценку</div>
+      </div>
+
+      <div class="q" data-q="interest_tourism">
+        <span class="q-label">Насколько интересны туристические возможности районов края? <span class="req">*</span></span>
+        <div class="scale">
+          <label class="opt"><input type="radio" name="interest_tourism" value="1"> 1</label>
+          <label class="opt"><input type="radio" name="interest_tourism" value="2"> 2</label>
+          <label class="opt"><input type="radio" name="interest_tourism" value="3"> 3</label>
+          <label class="opt"><input type="radio" name="interest_tourism" value="4"> 4</label>
+          <label class="opt"><input type="radio" name="interest_tourism" value="5"> 5</label>
+        </div>
+        <div class="err-msg">Пожалуйста, выберите оценку</div>
+      </div>
+
+      <div class="q" data-q="search_freq">
+        <span class="q-label">Как часто вы ищете информацию о крае? <span class="req">*</span></span>
+        <label class="opt"><input type="radio" name="search_freq" value="Почти никогда"> Почти никогда</label>
+        <label class="opt"><input type="radio" name="search_freq" value="Несколько раз в год"> Несколько раз в год</label>
+        <label class="opt"><input type="radio" name="search_freq" value="Несколько раз в месяц"> Несколько раз в месяц</label>
+        <label class="opt"><input type="radio" name="search_freq" value="Регулярно"> Регулярно (почти каждую неделю)</label>
+        <div class="err-msg">Пожалуйста, выберите вариант</div>
+      </div>
+    </section>
+
+    <section>
+      <h2>3. Проблемы с информацией</h2>
+
+      <div class="q" data-q="difficulties">
+        <span class="q-label">Сталкивались ли вы с трудностями при поиске информации о районах края? <span class="req">*</span></span>
+        <label class="opt"><input type="radio" name="difficulties" value="Да, часто"> Да, часто</label>
+        <label class="opt"><input type="radio" name="difficulties" value="Иногда"> Иногда</label>
+        <label class="opt"><input type="radio" name="difficulties" value="Редко"> Редко</label>
+        <label class="opt"><input type="radio" name="difficulties" value="Нет, никогда"> Нет, никогда</label>
+        <div class="err-msg">Пожалуйста, выберите вариант</div>
+      </div>
+
+      <div class="q" data-q="problems">
+        <span class="q-label">Какие проблемы встречали? <em>(можно несколько)</em> <span class="req">*</span></span>
+        <label class="opt"><input type="checkbox" name="problems" value="Информация разбросана по сайтам"> Информация разбросана по разным сайтам</label>
+        <label class="opt"><input type="checkbox" name="problems" value="Нет единой базы"> Нет единой удобной базы / карты / сайта</label>
+        <label class="opt"><input type="checkbox" name="problems" value="Много устаревшей информации"> Много устаревшей информации</label>
+        <label class="opt"><input type="checkbox" name="problems" value="Сложно найти по районам"> Сложно найти информацию именно по районам</label>
+        <label class="opt"><input type="checkbox" name="problems" value="Мало понятной информации"> Мало интересной и понятной информации</label>
+        <label class="opt"><input type="checkbox" name="problems" value="Другое" data-other="problems_other"> Другое</label>
+        <input type="text" name="problems_other" placeholder="Свой вариант…" style="display:none;margin-top:6px">
+        <div class="err-msg">Выберите хотя бы один вариант</div>
+      </div>
+
+      <div class="q" data-q="formats">
+        <span class="q-label">Какой формат информации удобен? <em>(можно несколько)</em> <span class="req">*</span></span>
+        <label class="opt"><input type="checkbox" name="formats" value="Интерактивная карта"> Интерактивная карта</label>
+        <label class="opt"><input type="checkbox" name="formats" value="Сайт / портал"> Сайт / портал с разделами по районам</label>
+        <label class="opt"><input type="checkbox" name="formats" value="Мобильное приложение"> Мобильное приложение</label>
+        <label class="opt"><input type="checkbox" name="formats" value="Статьи и путеводители"> Текстовые статьи и путеводители</label>
+        <label class="opt"><input type="checkbox" name="formats" value="Видео"> Видео / короткие ролики</label>
+        <label class="opt"><input type="checkbox" name="formats" value="Аудиогиды"> Аудиогиды</label>
+        <label class="opt"><input type="checkbox" name="formats" value="Другое" data-other="formats_other"> Другое</label>
+        <input type="text" name="formats_other" placeholder="Свой вариант…" style="display:none;margin-top:6px">
+        <div class="err-msg">Выберите хотя бы один вариант</div>
+      </div>
+    </section>
+
+    <section>
+      <h2>4. Потребность в проекте</h2>
+
+      <div class="q" data-q="usage_freq">
+        <span class="q-label">Как часто вы бы пользовались удобным ресурсом о районах края? <span class="req">*</span></span>
+        <label class="opt"><input type="radio" name="usage_freq" value="Постоянно"> Постоянно</label>
+        <label class="opt"><input type="radio" name="usage_freq" value="Иногда"> Иногда</label>
+        <label class="opt"><input type="radio" name="usage_freq" value="Редко"> Редко</label>
+        <label class="opt"><input type="radio" name="usage_freq" value="Не пользовался бы"> Скорее всего не пользовался бы</label>
+        <div class="err-msg">Пожалуйста, выберите вариант</div>
+      </div>
+
+      <div class="q" data-q="purposes">
+        <span class="q-label">Для каких целей пригодилась бы информация? <em>(можно несколько)</em> <span class="req">*</span></span>
+        <label class="opt"><input type="checkbox" name="purposes" value="Планирование путешествий"> Планирование путешествий по краю</label>
+        <label class="opt"><input type="checkbox" name="purposes" value="Учёба / проекты"> Учёба / проекты / исследования</label>
+        <label class="opt"><input type="checkbox" name="purposes" value="Работа"> Работа (туризм, образование, культура)</label>
+        <label class="opt"><input type="checkbox" name="purposes" value="Личный интерес"> Личный интерес / саморазвитие</label>
+        <label class="opt"><input type="checkbox" name="purposes" value="Рассказывать гостям"> Рассказывать гостям / туристам о крае</label>
+        <label class="opt"><input type="checkbox" name="purposes" value="Другое" data-other="purposes_other"> Другое</label>
+        <input type="text" name="purposes_other" placeholder="Свой вариант…" style="display:none;margin-top:6px">
+        <div class="err-msg">Выберите хотя бы один вариант</div>
+      </div>
+
+      <div class="q" data-q="audience">
+        <span class="q-label">Кто больше всего нуждается в такой информации? <em>(можно несколько)</em> <span class="req">*</span></span>
+        <label class="opt"><input type="checkbox" name="audience" value="Туристы"> Туристы (из других регионов и местные)</label>
+        <label class="opt"><input type="checkbox" name="audience" value="Школьники и студенты"> Школьники и студенты</label>
+        <label class="opt"><input type="checkbox" name="audience" value="Учителя и преподаватели"> Учителя и преподаватели</label>
+        <label class="opt"><input type="checkbox" name="audience" value="Работники туризма"> Работники туристической сферы</label>
+        <label class="opt"><input type="checkbox" name="audience" value="Краеведы"> Краеведы и исследователи</label>
+        <label class="opt"><input type="checkbox" name="audience" value="Местные жители"> Местные жители</label>
+        <label class="opt"><input type="checkbox" name="audience" value="Другое" data-other="audience_other"> Другое</label>
+        <input type="text" name="audience_other" placeholder="Свой вариант…" style="display:none;margin-top:6px">
+        <div class="err-msg">Выберите хотя бы один вариант</div>
+      </div>
+    </section>
+
+    <section>
+      <h2>5. Завершающий вопрос</h2>
+      <div class="q">
+        <span class="q-label">Какой информации о районах Хабаровского края вам сейчас не хватает? <em>(необязательно)</em></span>
+        <textarea name="missing_info" placeholder="Ваш ответ…"></textarea>
+      </div>
+    </section>
+
+    <button type="submit" class="btn" id="submitBtn">Отправить анонимно</button>
+    <p class="footer">🔒 Мы не собираем персональные данные. Ответы используются только в обобщённом виде.</p>
+  </form>
+
+  <div class="thanks" id="thanks">
+    <h2>✅ Спасибо за участие!</h2>
+    <p>Ваш ответ анонимно сохранён и поможет нам сделать проект лучше.</p>
+  </div>
+
+</div>
+
+<script>
+(function(){
+  // ⚠️ ЗАМЕНИТЕ НА СВОЙ URL ИЗ ШАГА 2.3
+  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxwK58xlw7H7AGUTOSMAlGKZURhre15R5dtXX4TkVY9kDYod3uuo-KO9CN1q5xufUJB/exec';
+
+  const form = document.getElementById('survey');
+  const thanks = document.getElementById('thanks');
+  const submitBtn = document.getElementById('submitBtn');
+
+  form.addEventListener('change', (e) => {
+    const el = e.target;
+    if (el.type === 'radio') {
+      form.querySelectorAll(`input[name="${el.name}"]`).forEach(r => {
+        r.closest('.opt').classList.toggle('checked', r.checked);
+      });
+    } else if (el.type === 'checkbox') {
+      el.closest('.opt').classList.toggle('checked', el.checked);
+      const otherName = el.dataset.other;
+      if (otherName) {
+        const otherInput = form.querySelector(`input[name="${otherName}"]`);
+        const group = form.querySelectorAll(`input[name="${el.name}"][data-other]`);
+        const anyChecked = [...group].some(g => g.checked);
+        otherInput.style.display = anyChecked ? 'block' : 'none';
+        if (!anyChecked) otherInput.value = '';
+      }
+    }
+  });
+
+  function validate() {
+    let ok = true;
+    ['age','location','activity','interest_history','interest_tourism',
+     'search_freq','difficulties','usage_freq'].forEach(name => {
+      const q = form.querySelector(`[data-q="${name}"]`);
+      const checked = form.querySelector(`input[name="${name}"]:checked`);
+      q.querySelector('.err-msg').classList.toggle('show', !checked);
+      if (!checked) ok = false;
+    });
+    ['problems','formats','purposes','audience'].forEach(name => {
+      const q = form.querySelector(`[data-q="${name}"]`);
+      const checked = form.querySelectorAll(`input[name="${name}"]:checked`);
+      q.querySelector('.err-msg').classList.toggle('show', checked.length === 0);
+      if (checked.length === 0) ok = false;
+    });
+    return ok;
+  }
+
+  function collect() {
+    const data = {};
+    const fd = new FormData(form);
+    for (const [key, value] of fd.entries()) {
+      if (value === '') continue;
+      if (data[key] !== undefined) data[key] = [].concat(data[key], value);
+      else data[key] = value;
+    }
+    ['problems','formats','purposes','audience'].forEach(name => {
+      const otherVal = data[name + '_other'];
+      if (otherVal) {
+        if (data[name] === undefined) data[name] = [];
+        data[name] = [].concat(data[name], 'Другое: ' + otherVal);
+      }
+      delete data[name + '_other'];
+    });
+    data.timestamp = new Date().toISOString();
+    return data;
+  }
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (!validate()) {
+      const firstErr = form.querySelector('.err-msg.show');
+      if (firstErr) firstErr.scrollIntoView({behavior:'smooth', block:'center'});
+      return;
+    }
+
+    const data = collect();
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Отправляем…';
+
+    try {
+      await fetch(SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {'Content-Type': 'text/plain;charset=utf-8'},
+        body: JSON.stringify(data)
+      });
+
+      try {
+        const stored = JSON.parse(localStorage.getItem('survey_anonymous') || '[]');
+        stored.push(data);
+        localStorage.setItem('survey_anonymous', JSON.stringify(stored));
+      } catch(_) {}
+
+      form.style.display = 'none';
+      thanks.style.display = 'block';
+      window.scrollTo({top:0, behavior:'smooth'});
+    } catch (err) {
+      console.error(err);
+      alert('Ошибка отправки. Проверьте интернет и попробуйте ещё раз.');
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Отправить анонимно';
+    }
+  });
+})();
+</script>
+</body>
+</html>
